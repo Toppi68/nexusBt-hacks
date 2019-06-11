@@ -25,7 +25,7 @@ module.exports = class config {
                 }
             } else {
                 if (this.fs.existsSync(this.path)){
-                    this.fs.writeFile(this.path+this.fileName, "{/*config file*/}", (err) => {
+                    this.fs.writeFile(this.path+this.fileName, "{}", (err) => {
                         if (err) throw err;
                     });
                 } else {
