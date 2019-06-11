@@ -11,12 +11,11 @@
 
 module.exports = class cache {
     constructor(path){
-        //
         this.fs = require('fs');
         this.findRoot = require('find-root');
         this.time = Math.floor(new Date().getTime()/1000);
         this.fileName = "/_cache.json";
-        this.path = path||this.findRoot(process.cwd());
+        this.path = path||this.findRoot(__dirname);
         this._cache = {
             "alive" :0,
             "data" : {}
