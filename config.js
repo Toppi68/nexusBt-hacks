@@ -11,11 +11,10 @@
 
 module.exports = class config {
     constructor(path){
-        //
         this.fs = require('fs');
         this.findRoot = require('find-root');
         this.fileName = "/_config.json";
-        this.path = path||this.findRoot(process.cwd());
+        this.path = path||this.findRoot(__dirname);
         this.config = {};
         try {
             if (this.fs.existsSync(this.path+this.fileName)) {
