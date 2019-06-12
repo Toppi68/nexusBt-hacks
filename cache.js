@@ -11,6 +11,7 @@
 
 module.exports = class cache {
     constructor(path){
+        //
         this.fs = require('fs');
         this.findRoot = require('find-root');
         this.time = Math.floor(new Date().getTime()/1000);
@@ -67,7 +68,7 @@ module.exports = class cache {
      * (PHP/Unixtimestamp in Sekunden)
      */
     setAlive(timestampInSecs){
-        this._cache.alive = parseInt(this.time+timestampInSecs)||0;
+        this._cache.alive = this.time+parseInt(timestampInSecs)||0;
         this._writecache();
     }
     /**
