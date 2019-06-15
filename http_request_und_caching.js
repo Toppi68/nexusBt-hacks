@@ -67,20 +67,20 @@ class BTNexusHook extends Hook {
      * @returns {JSON} oder false
      */
     apiCall(url, callback){
-        if(!url||!callback){
-            callback(false);
-            return;           
-        }
-        var md5Url = md5(String(url));        
-        if(this.cache.get(md5Url)){
-            console.log("GET *Cached*: "+url);
-            callback(this.cache.get(md5Url));
+        if(url && callback){
+            var md5Url = md5(String(url));        
+            if(this.cache.get(md5Url)){
+                console.log("GET *Cached*: "+url);
+                callback(this.cache.get(md5Url));
+            } else {
+                console.log("GET: "+url);
+                this.request('GET', url, {}, (resp) => {
+                    this.cache.set(md5Url,resp);
+                    callback(resp);
+                });
+            }           
         } else {
-            console.log("GET: "+url);
-            this.request('GET', url, {}, (resp) => {
-                this.cache.set(md5Url,resp);
-                callback(resp);
-            });
+           callback (false);
         }
     }
 }
